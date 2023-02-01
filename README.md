@@ -1,2 +1,2 @@
-# M151-Uebungen
+# M151-Uebungen 😎
 Übungen für M151 
