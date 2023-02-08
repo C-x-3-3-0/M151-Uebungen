@@ -1,25 +1,32 @@
-<h1>Pizza Konfigurator</h1>
-
 <?php
-$defaultToppings = ['Salami', 'Zwiebeln', 'Speck'];
-
+// 1. Session starten
+session_start();
+// 2. Daten aus Session lesen
+$ingredients = [];
+if (array_key_exists('ingredients', $_SESSION)) {
+    $ingredients = $_SESSION['ingredients'];
+}
+// 3. Daten verändern
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $toppings = isset($_POST['toppings']) ? array_merge($defaultToppings, $_POST['toppings']) : $defaultToppings;
-    echo "Deine Pizza besteht aus folgenden Toppings:<br>";
-    foreach ($toppings as $topping) {
-        echo "{$topping}<br>";
-    }
-} else {
-    echo "Deine Pizza besteht aus folgenden Toppings:<br>";
-    foreach ($defaultToppings as $topping) {
-        echo "•{$topping}<br>";
+    $newIngredient = array_key_exists('ingredient', $_POST) ? $_POST['ingredient'] : '';
+    if ($newIngredient !== '') {
+        array_push($ingredients, $newIngredient);
+//        $ingredients[] = $newIngredient;
     }
 }
+// 4. Daten in Session speichern
+$_SESSION['ingredients'] = $ingredients;
 ?>
-
-<form method="POST" action="">
-    <h3>Füge weitere Zutaten hinzu:
-    <input type="text" name="new_topping" placeholder="Zutat" /></h3>
+<h1>Zutat hinzufügen</h1>
+<form method="post" action="?">
+    <input type="text" name="ingredient" placeholder="Zutat eingeben..." />
     <input type="submit" value="Hinzufügen" />
-    <input type="hidden" name="toppings[]" value="" />
 </form>
+<h2>Deine Zutaten</h2>
+<ul>
+    <?php
+        foreach ($ingredients as $ingredient) {
+            echo "<li>{$ingredient}</li>";
+        }
+    ?>
+</ul>
