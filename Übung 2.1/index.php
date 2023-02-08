@@ -24,7 +24,18 @@ if ($result->num_rows > 0) {
 } else {
   echo "Keine Resultate vorhanden";
 }
+echo"<pre>";
 var_dump($result);
+echo"</pre>";
+
+$sql = "SELECT * FROM customers WHERE job_title = 'Purchasing Representative'";
+$result = $conn->query($sql);
+while($record = mysqli_fetch_assoc($result)){
+    echo"<pre>";
+    var_dump($result);
+    echo"</pre>";
+
+}
 
 mysqli_close($conn);
 ?>
