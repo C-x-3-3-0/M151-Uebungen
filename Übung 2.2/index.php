@@ -21,6 +21,7 @@ als Ausnahmen. Das bedeutet, dass beim Auftreten von Fehlern während der Datenb
 } catch(PDOException $e) {
   echo "Connection failed: " . $e->getMessage();
 }
+echo "<h2>Datenausgabe</h2>";
 $statement = $conn->prepare("SELECT * FROM customers");
 $statement->execute();
 while($row = $statement->fetch()) {
