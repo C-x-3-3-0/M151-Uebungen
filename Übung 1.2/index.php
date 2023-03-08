@@ -4,4 +4,4 @@
     echo "Die Seite wurde {$anzahl_aufrufe}x aufgerufen.";
     
     $anzahl_aufrufe++;
-?>
+?> 
